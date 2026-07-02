@@ -1,0 +1,10 @@
+{
+  "name": "sdr-agent",
+  "version": "2.0.0",
+  "description": "Genera documentos SDR (Solution Design Reference) de analytics en HTML y PDF con branding Globant Adobe Studio, y valida el resultado.",
+  "author": {
+    "name": "omni.pro · Globant"
+  },
+  "keywords": ["analytics", "sdr", "datalayer", "tracking", "ga4", "adobe"],
+  "license": "UNLICENSED"
+}

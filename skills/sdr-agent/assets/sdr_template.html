@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SDR — {{CLIENT_NAME}} {{VERSION}} | Globant · Adobe Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   GLOBANT · ADOBE STUDIO — DESIGN SYSTEM v1.0
+   NO MODIFICAR ESTOS ESTILOS — están bloqueados
+   Solo cambia el contenido dentro de los placeholders
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --bg:      #FFFFFF;
+  --sur:     #F8FAFB;
+  --bdr:     #E2EAF0;
+  --pri:     #000000;
+  --acc:     #C5FF02;
+  --blue:    #1E6FFF;
+  --txt:     #0A1628;
+  --sec:     #3D5166;
+  --mut:     #7A90A4;
+  --th:      #F0F8FF;
+  --str:     #F8FAFB;
+  --sh:      0 2px 16px rgba(10,22,40,.08);
+  --r:       0px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── HEADER ── */
+.doc-header { background:#000; color:#fff; padding:0; position:relative; overflow:hidden }
+.doc-header::before {
+  content:''; position:absolute; top:-60px; right:-60px;
+  width:280px; height:280px; border-radius:50%;
+  background: radial-gradient(circle at 40% 40%, rgba(197,255,2,.18) 0%, rgba(197,255,2,.04) 60%, transparent 80%);
+  pointer-events:none;
+}
+.header-top {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 48px 12px; border-bottom:1px solid rgba(255,255,255,.1);
+}
+.breadcrumb { font-size:11px; color:rgba(255,255,255,.5); letter-spacing:.6px }
+.breadcrumb strong { color:rgba(255,255,255,.8); font-weight:600 }
+.header-body { padding:32px 48px 36px }
+.doc-header h1 { font-size:32px; font-weight:800; letter-spacing:-.5px; margin-bottom:4px }
+.doc-header h1 em { font-style:italic; font-weight:300; color:var(--acc) }
+.doc-subtitle { font-size:14px; color:rgba(255,255,255,.6); font-weight:400; margin-bottom:24px }
+.meta { display:flex; flex-wrap:wrap; gap:24px; margin-top:20px }
+.meta-item { display:flex; flex-direction:column; gap:2px }
+.meta-label { font-size:10px; text-transform:uppercase; letter-spacing:.8px; color:rgba(255,255,255,.4); font-weight:600 }
+.meta-value { font-size:13px; font-weight:600; color:rgba(255,255,255,.9) }
+.confidential {
+  position:absolute; bottom:0; left:0;
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  font-size:9px; color:rgba(255,255,255,.2);
+  padding:8px 6px; letter-spacing:.8px;
+}
+
+/* ── LOGO (Globant Adobe Studio SVG — no cambiar) ── */
+/* Usar siempre el SVG inline a continuación en el header y footer.
+   Chevron #BFD732 = solo logo. Acento de UI = #C5FF02 (--acc). */
+
+/* ── CONTAINER ── */
+.container { max-width:1200px; margin:0 auto; padding:40px 48px }
+
+/* ── CARDS ── */
+.card { background:var(--sur); border:1px solid var(--bdr); border-radius:var(--r); box-shadow:var(--sh); margin-bottom:24px; overflow:hidden }
+.card-body { padding:20px }
+
+/* ── SECTION TITLES ── */
+.section-title {
+  font-size:18px; font-weight:800; margin:44px 0 16px;
+  padding-bottom:10px; border-bottom:2px solid var(--bdr);
+  display:flex; align-items:center; gap:10px; letter-spacing:-.3px;
+}
+.section-title::before {
+  content:''; display:inline-block; width:3px; height:20px;
+  background:var(--acc); border-radius:2px; flex-shrink:0;
+}
+.section-count { font-size:12px; font-weight:500; color:var(--mut); margin-left:auto }
+
+/* ── SUMMARY GRID ── */
+.summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; margin-bottom:32px }
+.summary-card {
+  background:var(--bg); border:1px solid var(--bdr); border-radius:var(--r);
+  padding:20px; text-align:center; box-shadow:var(--sh); position:relative; overflow:hidden;
+}
+.summary-card::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--acc) }
+.summary-card .number { font-size:36px; font-weight:800; color:var(--txt); line-height:1; margin-bottom:4px; letter-spacing:-1px }
+.summary-card .label { font-size:11px; color:var(--mut); font-weight:600; text-transform:uppercase; letter-spacing:.6px }
+
+/* ── LEGEND ── */
+.legend { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:32px }
+.legend-item { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sec) }
+
+/* ── BADGES DE ESTADO (NO MODIFICAR) ── */
+.ev-status {
+  background:#000; padding:3px 10px 3px 8px;
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:11px; font-weight:700; letter-spacing:.3px;
+}
+.sdot { width:9px; height:9px; border-radius:50%; display:inline-block; flex-shrink:0 }
+.ev-new      .sdot { background:#C5FF02; box-shadow:0 0 0 2px rgba(197,255,2,.25) }
+.ev-updated  .sdot { background:#FFD600; box-shadow:0 0 0 2px rgba(255,214,0,.25) }
+.ev-existing .sdot { background:#1E6FFF; box-shadow:0 0 0 2px rgba(30,111,255,.25) }
+.ev-new      { color:#C5FF02 }
+.ev-updated  { color:#C5FF02 }
+.ev-existing { color:#C5FF02 }
+
+/* ── EVENT BLOCKS ── */
+.event-block { border:1px solid var(--bdr); border-radius:var(--r); margin-bottom:16px; overflow:hidden }
+.event-header {
+  padding:12px 20px; background:var(--pri);
+  display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap;
+}
+.event-name {
+  font-family:'Plus Jakarta Sans', monospace; font-size:13px; font-weight:700;
+  background:var(--acc); color:#000; padding:3px 10px; border-radius:0; letter-spacing:.2px;
+}
+.event-cja { font-size:12px; color:rgba(255,255,255,.5); align-self:center; margin-left:auto }
+.event-body { padding:16px 20px; background:var(--bg) }
+.event-description { margin-bottom:10px; font-size:13px; color:var(--sec) }
+.event-trigger { font-size:13px; margin-bottom:14px }
+.event-trigger strong { color:var(--txt) }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x:auto }
+.attr-table { width:100%; border-collapse:collapse; font-size:13px }
+.attr-table th {
+  background:var(--pri); color:#fff; padding:8px 12px; text-align:left;
+  font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.6px;
+  border-bottom:2px solid var(--acc); white-space:nowrap;
+}
+.attr-table td { padding:9px 12px; border-bottom:1px solid var(--bdr); vertical-align:top; color:var(--txt) }
+.attr-table tr:last-child td { border-bottom:none }
+.attr-table tr:nth-child(even) td { background:var(--str) }
+.attr-table tr:hover td { background:#F0FCE8 }
+.attr-table td code, .attr-table th code {
+  font-family:'SFMono-Regular', Consolas, monospace; font-size:12px;
+  background:rgba(197,255,2,.15); color:#2a5a00; padding:1px 5px; border-radius:2px;
+}
+.attr-table td.sub-attr { padding-left:28px; color:var(--mut) }
+
+/* ── TYPE TAGS ── */
+.type-tag { display:inline-block; padding:1px 7px; border-radius:2px; font-size:11px; font-weight:700; letter-spacing:.2px }
+.type-String,.type-string   { background:#E0F2FE; color:#0369A1 }
+.type-Integer,.type-integer { background:#FEF9C3; color:#854D0E }
+.type-Double,.type-double   { background:#FCE7F3; color:#9D174D }
+.type-Boolean,.type-boolean { background:#D1FAE5; color:#065F46 }
+.type-Array  { background:#EDE9FE; color:#4C1D95 }
+.type-Object { background:#EDE9FE; color:#4C1D95 }
+.type-Date   { background:#FFEDD5; color:#9A3412 }
+
+/* ── FOOTER ── */
+.doc-footer {
+  background:#000; color:rgba(255,255,255,.4);
+  text-align:center; padding:24px 48px; font-size:11px; margin-top:60px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+
+/* ── IMPRESIÓN / PDF (no modificar) ── */
+@page { size: A4; margin: 14mm 12mm; }
+@media print {
+  .container { max-width:none; padding:24px 32px; }
+  .doc-header { margin:0; }
+  /* No partir bloques clave entre páginas */
+  .event-block, .summary-card, .card, .legend { break-inside: avoid; page-break-inside: avoid; }
+  .attr-table tr { break-inside: avoid; page-break-inside: avoid; }
+  .attr-table thead { display: table-header-group; }  /* repite cabecera si la tabla se parte */
+  .section-title { break-after: avoid; page-break-after: avoid; }
+  /* La confidencialidad vertical del header se oculta en PDF; el footer conserva el aviso */
+  .confidential { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ HEADER — no cambiar la estructura, solo los placeholders ═══════ -->
+<header class="doc-header">
+  <div class="header-top">
+    <span class="breadcrumb"><strong>/ Analytics</strong> · Solution Design Reference</span>
+    <!-- LOGO Globant Adobe Studio — SVG inline, siempre en blanco, chevron #BFD732 -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" height="44" aria-label="Globant Adobe Studio">
+      <text x="0" y="30" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="26" fill="#FFFFFF" letter-spacing="-0.5">Globant</text>
+      <text x="103" y="30" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="22" fill="#BFD732">&#x276F;</text>
+      <text x="1" y="44" font-family="'Plus Jakarta Sans',sans-serif" font-weight="500" font-size="10" fill="rgba(255,255,255,0.6)" letter-spacing="0.3">Adobe Studio</text>
+    </svg>
+  </div>
+  <div class="header-body">
+    <h1>Solution Design <em>Reference</em></h1>
+    <p class="doc-subtitle">{{CLIENT_NAME}} — {{DOC_SUBTITLE}}</p>
+    <div class="meta">
+      <div class="meta-item"><span class="meta-label">Versión</span><span class="meta-value">{{VERSION}}</span></div>
+      <div class="meta-item"><span class="meta-label">Fecha</span><span class="meta-value">{{DATE}}</span></div>
+      <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">{{STACK}}</span></div>
+      <div class="meta-item"><span class="meta-label">Alcance</span><span class="meta-value">{{SCOPE}}</span></div>
+      <!-- Añadir más meta-items según necesidad -->
+    </div>
+  </div>
+  <span class="confidential">{{CONFIDENTIALITY}}</span>
+</header>
+
+<!-- ═══════ CONTENIDO ═══════ -->
+<div class="container">
+
+  <!-- LEYENDA DE ESTADOS — no cambiar los colores -->
+  <div class="legend">
+    <div class="legend-item">
+      <span class="ev-status ev-new"><span class="sdot"></span>NUEVO</span>
+      <span>Nuevo MVP 3.0</span>
+    </div>
+    <div class="legend-item">
+      <span class="ev-status ev-updated"><span class="sdot"></span>ACTUALIZADO</span>
+      <span>Se añadieron atributos nuevos</span>
+    </div>
+    <div class="legend-item">
+      <span class="ev-status ev-existing"><span class="sdot"></span>EXISTENTE</span>
+      <span>Existe</span>
+    </div>
+  </div>
+
+  <!-- RESUMEN EJECUTIVO -->
+  <h2 class="section-title" id="resumen">Resumen ejecutivo<span class="section-count"></span></h2>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="number">{{TOTAL_EVENTS}}</div><div class="label">Eventos documentados</div></div>
+    <div class="summary-card"><div class="number">{{TOTAL_VARS}}</div><div class="label">Variables documentadas</div></div>
+    <div class="summary-card"><div class="number">{{NEW_EVENTS}}</div><div class="label">Eventos nuevos</div></div>
+    <div class="summary-card"><div class="number">{{TOTAL_SECTIONS}}</div><div class="label">Secciones</div></div>
+  </div>
+
+  <!-- TABLA RESUMEN POR SECCIÓN -->
+  <div class="card"><div class="card-body">
+    <div class="table-wrap"><table class="attr-table">
+      <thead><tr><th>Sección</th><th>Eventos</th><th>Variables</th><th>Nuevos</th></tr></thead>
+      <tbody>
+        <!-- {{SECTION_SUMMARY_ROWS}}
+        Ejemplo de fila:
+        <tr><td>🛒 Ecommerce</td><td>12</td><td>200</td><td>0</td></tr>
+        -->
+      </tbody>
+    </table></div>
+  </div></div>
+
+  <!-- ═══════ SECCIONES DE EVENTOS ═══════
+    Repetir el bloque siguiente por cada sección.
+    Estructura de un evento:
+
+    <h2 class="section-title" id="{{SECTION_ID}}">{{SECTION_EMOJI}} {{SECTION_NAME}}<span class="section-count">{{N}} eventos</span></h2>
+
+    <div class="event-block">
+      <div class="event-header">
+        <span class="event-name">{{event_name}}</span>
+        <span class="ev-status ev-new|ev-updated|ev-existing">
+          <span class="sdot"></span>NUEVO|ACTUALIZADO|EXISTENTE
+        </span>
+        <span class="event-cja">{{CANAL}}</span>  <!-- opcional -->
+      </div>
+      <div class="event-body">
+        <p class="event-description">{{DESCRIPCIÓN DEL EVENTO}}</p>
+        <p class="event-trigger"><strong>Trigger:</strong> {{CUÁNDO SE DISPARA}}</p>
+        <div class="table-wrap"><table class="attr-table">
+          <thead>
+            <tr>
+              <th>Atributo</th>
+              <th>Tipo</th>
+              <th>Ejemplo</th>
+              <th>Default</th>
+              <th>Descripción</th>
+              <th>Obligatorio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>nombre_atributo</code></td>
+              <td><span class="type-tag type-String">String</span></td>
+              <td>"valor ejemplo"</td>
+              <td>""</td>
+              <td>Descripción del atributo</td>
+              <td>Sí / No</td>
+            </tr>
+            <tr>
+              <td class="sub-attr"><code>sub_atributo</code></td>
+              <td><span class="type-tag type-String">String</span></td>
+              <td>"valor"</td>
+              <td>""</td>
+              <td>Sub-atributo anidado (Object/Array) — fila indentada, no columna aparte</td>
+              <td>No</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  ═══════ FIN ESTRUCTURA DE EVENTOS ═══════ -->
+
+  <!-- {{EVENTS_CONTENT}} — Insertar aquí todos los bloques de eventos -->
+
+</div><!-- /container -->
+
+<!-- ═══════ FOOTER — no cambiar la estructura ═══════ -->
+<footer class="doc-footer">
+  <span>{{CLIENT_NAME}} · SDR {{VERSION}} · {{DATE}}<br><span style="opacity:.55;font-size:10px">Generado con sdr-agent v{{SKILL_VERSION}}</span></span>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" height="36" aria-label="Globant Adobe Studio">
+    <text x="0" y="30" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="26" fill="#FFFFFF" letter-spacing="-0.5" opacity="0.5">Globant</text>
+    <text x="103" y="30" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="22" fill="#BFD732" opacity="0.6">&#x276F;</text>
+    <text x="1" y="44" font-family="'Plus Jakarta Sans',sans-serif" font-weight="500" font-size="10" fill="rgba(255,255,255,0.4)" letter-spacing="0.3">Adobe Studio</text>
+  </svg>
+  <span>{{CONFIDENTIALITY}}</span>
+</footer>
+
+</body>
+</html>

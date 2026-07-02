@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# SO
+.DS_Store
+Thumbs.db
+
+# Salidas generadas (SDRs de prueba); el template y los scripts SÍ se versionan
+*.pdf
+sdr-*.html
+!skills/sdr-agent/assets/sdr_template.html

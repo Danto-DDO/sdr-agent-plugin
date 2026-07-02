@@ -1,0 +1,17 @@
+{
+  "name": "omni-analytics",
+  "owner": {
+    "name": "omni.pro · Globant"
+  },
+  "description": "Marketplace de skills de analytics de omni.pro / Globant.",
+  "plugins": [
+    {
+      "name": "sdr-agent",
+      "source": ".",
+      "description": "Genera documentos SDR (Solution Design Reference) de analytics en HTML.",
+      "version": "2.0.0",
+      "category": "analytics",
+      "tags": ["sdr", "datalayer", "ga4", "adobe", "tracking"]
+    }
+  ]
+}
