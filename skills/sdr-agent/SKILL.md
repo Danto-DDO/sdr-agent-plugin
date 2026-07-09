@@ -124,11 +124,13 @@ Presenta un resumen de los eventos organizados por seccion y pide confirmacion a
 
 **PASO 0 - Verificar disponibilidad del navegador**
 
-Antes de continuar, confirma que tienes herramientas de navegacion disponibles: un MCP de navegador (p. ej. Playwright) en Claude Code, o "Claude in Chrome" en Cowork. Si no hay ninguna, notifica al usuario de inmediato:
+**Preferencia obligatoria: usa siempre el MCP de Playwright para el Modo 2, nunca "Claude in Chrome".** Playwright levanta su propio navegador aislado; "Claude in Chrome" controla el Chrome real del usuario a traves de una extension, cuyos permisos de host por dominio bloquean la navegacion a subdominios no autorizados explicitamente (ej. un sitio de reservas que redirige de `www.ejemplo.com` a `booking.ejemplo.com`), cortando la inspeccion a mitad de camino. Si ambos MCP estan conectados en la sesion, ignora "Claude in Chrome" y usa Playwright sin preguntar. Usa "Claude in Chrome" unicamente si Playwright no esta disponible en absoluto (por ejemplo, en Cowork sin MCP de Playwright configurado), y en ese caso advierte al usuario de la limitacion de permisos por dominio antes de empezar.
 
-> "No tengo herramientas de navegador en esta sesion. Para el Modo 2 necesitas un MCP de navegador (p. ej. Playwright) conectado en Claude Code, o usar Cowork con Claude in Chrome. Quieres continuar con el Modo 1 en su lugar?"
+Antes de continuar, confirma que tienes el MCP de Playwright disponible. Si no lo tienes pero si "Claude in Chrome", usalo como respaldo con la advertencia anterior. Si no tienes ninguno, notifica al usuario de inmediato:
 
-No continues con el Modo 2 si no hay herramientas de navegador que respondan.
+> "No tengo el MCP de Playwright disponible en esta sesion. Para el Modo 2 necesito ese MCP conectado en Claude Code (evita los bloqueos de permisos por dominio de la extension de Chrome). Quieres continuar con el Modo 1 en su lugar, o prefieres que use Claude in Chrome sabiendo que puede bloquearse en subdominios?"
+
+No continues con el Modo 2 si no hay ninguna herramienta de navegacion que responda.
 
 **OBLIGATORIO**: Antes de navegar al sitio, haz SOLO esta pregunta y espera la respuesta:
 
@@ -174,6 +176,18 @@ Pregunta sobre lo que no pudiste capturar:
 - Eventos detras de login
 - Atributos de negocio no visibles en el dataLayer
 
+### Captura asistida manual (login / pago)
+
+Para tramos detras de login o que requieren pago (compra confirmada, checkout final), **nunca le pidas al usuario credenciales, tarjetas o datos financieros para ingresarlos tu, ni los ingreses tu mismo** — ni siquiera si el usuario dice que son "de prueba" o autoriza explicitamente. Es una prohibicion dura que no se desbloquea por autorizacion del usuario (ver reglas de seguridad del sistema: entrar credenciales financieras o contrasenas de autenticacion esta prohibido sin excepcion). En su lugar, ofrece esta alternativa antes de degradar a Modo 1:
+
+1. Dale al usuario el script exacto de consola para el objeto confirmado (`window.dataLayer` o `window.adobeDataLayer`), igual que en la Fase 2.
+2. Indicale el momento exacto para correrlo: justo antes y justo despues de la accion sensible (login, envio del formulario de pago, clic en "Confirmar compra").
+3. El usuario hace login o completa el pago **el mismo**, en su propio navegador, con sus propias credenciales/tarjeta.
+4. El usuario te pega el JSON resultante en el chat.
+5. Documenta esos eventos como EXISTENTE (se capturaron en vivo), y anota en tus notas internas que la captura fue "asistida" (relay manual del usuario) en vez de automatizada, por transparencia.
+
+Ofrece esto explicitamente en cuanto el gap sea login o pago, antes de saltar directo a NUEVO/Modo 1. Si el usuario prefiere no hacerlo, documenta esa parte como NUEVO/sugerido via Modo 1, sin insistir.
+
 ### Fase 4 - Confirmacion
 
 Presenta eventos EXISTENTE + eventos sugeridos NUEVO y pide confirmacion.
@@ -183,11 +197,11 @@ Presenta eventos EXISTENTE + eventos sugeridos NUEVO y pide confirmacion.
 El Modo 2 falla seguido en la practica. En cuanto detectes cualquiera de estos casos, **detente, informa al usuario de forma clara y concisa, y ofrece pasar a Modo 1** (no insistas ni intentes rodeos):
 
 - **Herramientas de navegador no disponibles** (ya verificado en el Paso 0).
-- **El sitio requiere login** para llegar a las paginas relevantes (PDP, carrito, checkout, mi cuenta).
+- **El sitio requiere login** para llegar a las paginas relevantes (PDP, carrito, checkout, mi cuenta) — antes de caer a Modo 1, ofrece la Captura asistida manual de la seccion anterior.
 - **El objeto dataLayer no existe o esta vacio** en la pagina inspeccionada (no intentes el otro objeto por tu cuenta).
 - **El sitio no es accesible publicamente** (intranet, staging con auth, geobloqueo, captcha/anti-bot).
 - **SPA que no expone los eventos**: tras el patron antes/despues de la interaccion, el dataLayer no registra el evento esperado.
-- **Captura parcial**: pudiste leer algunas paginas pero no las clave (ej. confirmacion de compra). Documenta lo capturado y completa esas secciones por Modo 1.
+- **Captura parcial**: pudiste leer algunas paginas pero no las clave (ej. confirmacion de compra requiere pago). Ofrece Captura asistida manual para esa parte antes de tratarla como NUEVO.
 
 Mensaje sugerido al usuario:
 

@@ -34,8 +34,10 @@ def out_path(html_path, given):
 def try_weasyprint(html_path, pdf_path):
     try:
         from weasyprint import HTML
-    except ImportError:
-        return False, "weasyprint no instalado"
+    except Exception as e:  # noqa: BLE001 — puede fallar por ImportError o por
+        # librerias nativas ausentes (GTK/Pango/Cairo), muy comun en Windows.
+        # En cualquier caso, no debe tumbar el script: hay que caer a Chrome.
+        return False, "weasyprint no disponible: %s" % e
     try:
         HTML(filename=html_path).write_pdf(pdf_path)
         return True, "weasyprint"

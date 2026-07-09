@@ -147,6 +147,7 @@ body {
 .attr-table td code, .attr-table th code {
   font-family:'SFMono-Regular', Consolas, monospace; font-size:12px;
   background:rgba(197,255,2,.15); color:#2a5a00; padding:1px 5px; border-radius:2px;
+  overflow-wrap:anywhere; word-break:break-word;
 }
 .attr-table td.sub-attr { padding-left:28px; color:var(--mut) }
 
@@ -168,7 +169,7 @@ body {
 }
 
 /* ── IMPRESIÓN / PDF (no modificar) ── */
-@page { size: A4; margin: 14mm 12mm; }
+@page { size: A4 landscape; margin: 14mm 12mm; }
 @media print {
   .container { max-width:none; padding:24px 32px; }
   .doc-header { margin:0; }
